@@ -19,7 +19,7 @@ git clone https://github.com/fewieden/MMM-ip.git
 
 cd ~/MagicMirror/modules/
 git clone https://github.com/glitch452/MMM-LocalTemperature.git
-sudo apt-get update && sudo apt-get upgrade && sudo apt-get install build-essential wiringpi
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y build-essential wiringpi 
 cd MMM-LocalTemperature && chmod +x DHT
 
 
