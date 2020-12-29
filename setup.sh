@@ -148,6 +148,7 @@ cat >/home/pi/.config/lxsession/LXDE-pi/autostart <<EOL
 @xset s off
 @xset -dpms
 @unclutter -display :0 -idle 3 -root -noevents
+@xrandr --output DSI-1 --rotate inverted
 
 @lxpanel --profile LXDE-pi
 @pcmanfm --desktop --profile LXDE-pi
