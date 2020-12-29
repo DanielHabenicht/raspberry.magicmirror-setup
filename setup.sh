@@ -9,6 +9,8 @@ sudo apt install -y nodejs
 
 echo "Installing Magicmirror, this might take a while"
 
+sudo apt-get install -y unclutter
+
 ## Install magic mirror
 git clone https://github.com/MichMich/MagicMirror
 cd ~/MagicMirror/
