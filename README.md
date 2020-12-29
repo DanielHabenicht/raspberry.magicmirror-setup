@@ -6,3 +6,7 @@ wget https://raw.githubusercontent.com/DanielHabenicht/raspberry.magicmirror-set
 chmod +x setup.sh
 ./setup.sh
 ```
+
+
+Headless Setup: 
+https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
