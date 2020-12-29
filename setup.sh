@@ -188,22 +188,15 @@ chromium-browser \
 EOL
 
 
-### Add Conjobs for turning on or off the display
-
-MARK="TURN_OFF"
-LINE="echo 1 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # $MARK"
-# NOTE: I'm using -e because I might want to avoid weird bash expansions for '*' or '$' and place:
-# \x2A instead of *
-# \x24 instead of $
-( crontab -l | grep -v $MARK ; echo -e "0 23 * * *" $LINE ) | crontab -
-
-MARK="TURN_ON"
-LINE="echo 0 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # $MARK"
-( crontab -l | grep -v $MARK ; echo -e "0 8 * * *" $LINE ) | crontab -
-
 EOF
 
-# Screen rotation: https://raspberrypi.stackexchange.com/questions/101282/pi-4-screen-rotation-from-the-terminal
-DISPLAY=:0 xrandr --output DSI-1 --rotate inverted
+### Add Conjobs for turning on or off the display
+crontab -l > mycron
+#echo new cron into cron file
+echo "0 8 * * * echo 0 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # TURN_ON" >> mycron
+echo "0 23 * * * echo 1 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # TURN_OFF" >> mycron
+#install new cron file
+crontab mycron
+
 
 # reboot
