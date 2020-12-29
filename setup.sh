@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo -i -u pi bash << EOF
+
 echo "Install node"
 ## Install node
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -34,14 +36,12 @@ git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
 cd MMM-BackgroundSlideshow
 npm install
 
+EOF
+
 
 echo "Setting up the client"
 ## Setting up desktop (client)
 
-#########################
-# Enter Sudo Mode
-#########################
-sudo -s
 ## Write config.txt
 
 cat >/boot/config.txt <<EOL
@@ -135,14 +135,12 @@ ExecStart=/usr/bin/node serveronly
 WantedBy=multi-user.target
 EOL
 
-sudo systemctl enable magicmirror.service
-sudo systemctl start magicmirror.service
+systemctl enable magicmirror.service
+systemctl start magicmirror.service
 
 
-#########################
-# Leave Sudo Mode
-#########################
-exit
+sudo -i -u pi bash << EOF
+
 mkdir /home/pi/.config/lxsession
 mkdir /home/pi/.config/lxsession/LXDE-pi
 cat >/home/pi/.config/lxsession/LXDE-pi/autostart <<EOL
@@ -189,17 +187,20 @@ EOL
 
 ### Add Conjobs for turning on or off the display
 
-MARK=TURN OFF
+MARK="TURN_OFF"
 LINE="echo 1 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # $MARK"
 # NOTE: I'm using -e because I might want to avoid weird bash expansions for '*' or '$' and place:
 # \x2A instead of *
 # \x24 instead of $
 ( crontab -l | grep -v $MARK ; echo -e "0 23 * * *" $LINE ) | crontab -
 
-MARK=TURN ON
+MARK="TURN_ON"
 LINE="echo 0 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # $MARK"
 ( crontab -l | grep -v $MARK ; echo -e "0 8 * * *" $LINE ) | crontab -
 
+EOF
 
+# Screen rotation: https://raspberrypi.stackexchange.com/questions/101282/pi-4-screen-rotation-from-the-terminal
+DISPLAY=:0 xrandr --output DSI-1 --rotate inverted
 
-# sudo reboot
+# reboot
