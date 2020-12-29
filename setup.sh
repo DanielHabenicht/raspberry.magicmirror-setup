@@ -197,7 +197,7 @@ echo "0 8 * * * echo 0 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # 
 echo "0 23 * * * echo 1 | sudo tee /sys/class/backlight/rpi_backlight/bl_power # TURN_OFF" >> mycron
 
 # If setup via HDMI: 
-#echo "0 8 * * * sudo /opt/vc/bin/tvservice -p # TURN_ON" >> mycron
+#echo "0 8 * * * sudo /opt/vc/bin/tvservice -p && sleep 1 && DISPLAY=:0 && xset dpms force on # TURN_ON" >> mycron
 #echo "0 23 * * * sudo /opt/vc/bin/tvservice -o # TURN_OFF" >> mycron
 #install new cron file
 crontab mycron
