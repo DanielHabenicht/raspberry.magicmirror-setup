@@ -38,6 +38,9 @@ git clone https://github.com/darickc/MMM-BackgroundSlideshow.git
 cd MMM-BackgroundSlideshow
 npm install
 
+cd ~/MagicMirror/modules/
+git clone https://github.com/KirAsh4/calendar_monthly
+
 EOF
 
 
