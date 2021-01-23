@@ -11,6 +11,8 @@ sudo ./setup.sh
 Headless Setup: 
 https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 
+Mount nfs drives:
+https://linuxize.com/post/how-to-mount-an-nfs-share-in-linux/
 
 
 ## Setup of Magicmirror and Home Assistant
