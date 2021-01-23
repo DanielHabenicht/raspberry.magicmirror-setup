@@ -41,6 +41,12 @@ npm install
 cd ~/MagicMirror/modules/
 git clone https://github.com/KirAsh4/calendar_monthly
 
+cd ~/MagicMirror/modules/
+git clone https://github.com/Jopyth/MMM-Remote-Control
+cd MMM-Remote-Control
+npm install
+
+
 EOF
 
 
