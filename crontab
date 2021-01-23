@@ -1,0 +1,3 @@
+0 9 * * 6-7 sudo /opt/vc/bin/tvservice -p && env DISPLAY=:0 sh -c 'xset dpms force off && sleep 6 && xset dpms force on && xset s off && xset -dpms && xset s noblank' # TURN_ON
+0 18 * * 1-5 sudo /opt/vc/bin/tvservice -p && env DISPLAY=:0 sh -c 'xset dpms force off && sleep 6 && xset dpms force on && xset s off && xset -dpms && xset s noblank' # TURN_ON
+30 22 * * * sudo /opt/vc/bin/tvservice -o # TURN_OFF
