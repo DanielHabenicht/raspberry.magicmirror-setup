@@ -46,6 +46,10 @@ git clone https://github.com/Jopyth/MMM-Remote-Control
 cd MMM-Remote-Control
 npm install
 
+cd ~/MagicMirror/modules/
+git clone https://github.com/DanielHabenicht/MMM-json.git
+npm install
+
 
 EOF
 
