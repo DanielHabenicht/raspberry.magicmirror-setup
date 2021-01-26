@@ -1,1 +1,1 @@
-45 21 * * * /var/ds216/random_images.sh
+45 21 * * * /var/ds216/copy_random_images.sh
