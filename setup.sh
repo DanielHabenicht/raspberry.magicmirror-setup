@@ -26,6 +26,15 @@ git clone https://github.com/glitch452/MMM-LocalTemperature.git
 sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y build-essential wiringpi 
 cd MMM-LocalTemperature && chmod +x DHT
 
+cd ~/MagicMirror/modules/
+git clone https://github.com/awitwicki/MMM-BME280.git
+cd MMM-BME280
+npm install
+pip3 install smbus
+# Enable I2C Communication Bus
+sudo raspi-config nonint do_i2c 0
+
+
 
 cd ~/MagicMirror/modules/
 git clone https://github.com/deg0nz/MMM-PublicTransportBerlin.git
