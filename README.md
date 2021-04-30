@@ -26,5 +26,8 @@ Follow Wifi Setup: https://github.com/home-assistant/operating-system/blob/dev/D
 
 
 
+Xiamoi BLE: 
 
+https://pvvx.github.io/ATC_MiThermometer/TelinkMiFlasher.html
 
+https://github.com/custom-components/ble_monitor
