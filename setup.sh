@@ -183,7 +183,7 @@ EOL
 
 
 mkdir /home/pi/bin
-cat >/home/pi/bin/start-chromium.sh <<"EOL"
+cat >/home/pi/bin/start-chromium.sh <<'EOL'
 #!/bin/sh
 
 set -e
