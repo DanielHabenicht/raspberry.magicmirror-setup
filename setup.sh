@@ -189,8 +189,8 @@ cat >/home/pi/bin/start-chromium.sh <<'EOL'
 set -e
 
 CHROMIUM_TEMP=~/tmp/chromium
-rm -Rf ~/.config/chromium/
-rm -Rf $CHROMIUM_TEMP
+#rm -Rf ~/.config/chromium/
+#rm -Rf $CHROMIUM_TEMP
 mkdir -p $CHROMIUM_TEMP
 
 # Power Saving
