@@ -4,6 +4,11 @@ sudo -i -u pi bash << EOF
 
 echo "Install node"
 ## Install node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+source ~/.bashrc
+nvm --version
+nvm install 16
+
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt install -y nodejs
 
