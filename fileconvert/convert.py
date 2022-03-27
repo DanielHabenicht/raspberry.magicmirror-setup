@@ -18,21 +18,26 @@ def extractText(x):
     return [entry[0].replace("\x00", ""), entry[1], comment]
 
 
+# directory = "D:\OpaArchiv"
 directory = ".\\fileconvert\\data"
 for root, subFolder, files in os.walk(directory):
     print(root)
     filteredFiles = np.array(
-        list(filter(lambda x: x.lower().endswith('.jpg'), files)))
+        list(filter(lambda x: re.search("\.(jpg|jpeg)", x.lower()), files)))
+    notFilteredFiles = np.array(
+        list(filter(lambda x: not x.lower().endswith('.jpg'), files)))
+    if len(notFilteredFiles) > 1:
+        print(f"WARNING: Following files wont be covered: {notFilteredFiles}")
     filedescriptions = {}
     if len(filteredFiles) > 0:
         # try:
         fileNamePath = str(os.path.join(root, 'keyword.bas'))
-        with open(fileNamePath, 'r', errors="ignore") as f:
+        with open(fileNamePath, 'r', encoding='iso-8859-15', errors="ignore") as f:
             text = f.read()
             positions = np.array(list(map(
                 lambda x: text.find(x), filteredFiles)))
             removeIndexes = np.where(positions == -1)[0]
-            keepIndices = np.ones(len(positions), np.bool)
+            keepIndices = np.ones(len(positions), bool)
             keepIndices[removeIndexes] = 0
 
             if len(removeIndexes) > 0:
@@ -73,17 +78,22 @@ for root, subFolder, files in os.walk(directory):
             result = list(filter(lambda x: file.lower()
                                  in x.lower(), comments.keys()))
             if len(result) > 0:
-                # print(" - " + file + ": " + comments[result[0]][2])
+                descriptionString = comments[result[0]][2]
+                print(" - " + file + ": " + descriptionString)
                 user_comment = piexif.helper.UserComment.dump(
-                    comments[result[0]][2])
-                # img = Image.open(fileNamePath)
-                # exif_dict = piexif.load(img.info['exif'])
-                # # print(exif_dict)
+                    descriptionString)
 
-                # # Add EXIF Description Data https://exiv2.org/tags.html
-                # exif_dict["Exif"][piexif.ExifIFD.UserComment] = user_comment
-                # exif_bytes = piexif.dump(exif_dict)
-                # img.save(fileNamePath, "jpeg", exif=exif_bytes)
+                exif_dict = piexif.load(fileNamePath)
+
+                # Add EXIF Description Data https://exiv2.org/tags.html
+                exif_dict["Exif"][piexif.ExifIFD.UserComment] = user_comment
+                try:
+                    exif_bytes = piexif.dump(exif_dict)
+                except piexif.InvalidImageDataError:
+                    del exif_dict["1st"]
+                    del exif_dict["thumbnail"]
+                    exif_bytes = piexif.dump(exif_dict)
+                piexif.insert(exif_bytes, fileNamePath)
             else:
                 print("WARNING: No Description found for '" + fileNamePath + "'")
 
