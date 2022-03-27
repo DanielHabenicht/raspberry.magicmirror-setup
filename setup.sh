@@ -231,3 +231,7 @@ crontab mycron
 
 
 # reboot
+
+# Setup the config.js of MagicMirror
+
+cp ~/MagicMirror/config.js.sample ~/MagicMirror/config.js 
